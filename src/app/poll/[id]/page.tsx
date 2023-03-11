@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { doc, increment, onSnapshot, updateDoc } from 'firebase/firestore'
 import { toast } from 'react-hot-toast'
 import { db } from 'lib/firebase/config'
+import { LinkIcon } from 'lib/components/icons'
 
 export default function Poll({ params }: { params: { id: string } }) {
   const [wait, setWait] = useState(true)
@@ -47,8 +48,13 @@ export default function Poll({ params }: { params: { id: string } }) {
     }
   }
 
-  if(!data){
+  if (!wait && !data) {
     notFound()
+  }
+  
+  const handleCopy = () => {
+    navigator.clipboard.writeText(window.location.toString())
+    toast.success('Link copied!')
   }
   return (
     <>
@@ -78,27 +84,40 @@ export default function Poll({ params }: { params: { id: string } }) {
                     {opt}
                   </div>
                   <div className='ml-auto flex space-x-4 items-center'>
-                    <div className='text-xs font-light italic'>{data.options[opt]} votes</div>
+                    <div className='text-xs font-light italic'>
+                      {data.options[opt]} votes
+                    </div>
                     <div className='font-normal text-sm'>
-                    {data.total !== 0
-                          ? Math.round((data.options[opt] / data.total) * 100)
-                          : 0}
-                        %
+                      {data.total !== 0
+                        ? Math.round((data.options[opt] / data.total) * 100)
+                        : 0}
+                      %
                     </div>
                   </div>
                 </div>
               ))}
 
             <div className='flex justify-between items-center w-full'>
-              <span className='text-sm font-light italic'>{data.total} votes</span>
-              <button
-                className='bg-my-purple px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none'
-                type='button'
-                disabled={selected === ''}
-                onClick={handleVote}
-              >
-                {wait ? '...' : 'Vote'}
-              </button>
+              <span className='text-sm font-light italic'>
+                {data.total} votes
+              </span>
+              <div className='flex space-x-6'>
+                <button
+                  className='w-9 h-9 flex items-center justify-center leading-6 bg-my-white bg-opacity-5 rounded-lg transition-all duration-75 focus:outline-none'
+                  type='button'
+                  onClick={handleCopy}
+                >
+                  <LinkIcon />
+                </button>
+                <button
+                  className='bg-my-purple px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none'
+                  type='button'
+                  disabled={selected === ''}
+                  onClick={handleVote}
+                >
+                  {wait ? '...' : 'Vote'}
+                </button>
+              </div>
             </div>
           </div>
         </div>

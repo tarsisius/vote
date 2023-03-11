@@ -104,7 +104,7 @@ export default function Home() {
             </button>
           )}
           <button
-            className='bg-my-purple text-my-white px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none'
+            className='bg-my-purple text-my-white px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none ml-auto'
             type='submit'
           >
             {wait ? '...' : 'Create'}

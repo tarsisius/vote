@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Albert_Sans } from 'next/font/google'
+import Link from 'next/link'
 import 'lib/styles/globals.css'
 import Toast from 'lib/components/toast'
 
@@ -35,6 +36,17 @@ export default function RootLayout({ children }: Props) {
               {children}
             </div>
           </div>
+          <footer className='text-center mt-auto py-6 text-my-white text-opacity-40'>
+            Project by{' '}
+            <a
+              className='hover:text-opacity-100 hover:text-my-white'
+              target='_blank'
+              href='https://thp.my.id/'
+              rel='noopener noreferrer'
+            >
+              @tarsisius
+            </a>
+          </footer>
         </div>
       </body>
     </html>
