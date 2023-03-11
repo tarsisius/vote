@@ -14,8 +14,8 @@ const as = Albert_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Ngom-poll',
-    template: '%s | Ngom-Poll',
+    default: 'Voting',
+    template: '%s | Voting',
   },
   description: 'Create your own poll!.',
   icons: {
