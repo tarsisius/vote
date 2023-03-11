@@ -41,7 +41,7 @@ export default function RootLayout({ children }: Props) {
             <a
               className='hover:text-opacity-100 hover:text-my-white'
               target='_blank'
-              href='https://thp.my.id/'
+              href='https://github.com/tarsisius'
               rel='noopener noreferrer'
             >
               @tarsisius
