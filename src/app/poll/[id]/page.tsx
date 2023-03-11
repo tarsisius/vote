@@ -73,7 +73,7 @@ export default function Poll({ params }: { params: { id: string } }) {
                     {opt}
                   </div>
                   <div className='ml-auto flex space-x-4 items-center'>
-                    <div className='text-xs font-light'>{data.options[opt]} votes</div>
+                    <div className='text-xs font-light italic'>{data.options[opt]} votes</div>
                     <div className='font-normal text-sm'>
                     {data.total !== 0
                           ? Math.round((data.options[opt] / data.total) * 100)
@@ -85,7 +85,7 @@ export default function Poll({ params }: { params: { id: string } }) {
               ))}
 
             <div className='flex justify-between items-center w-full'>
-              <span className='text-sm font-light'>{data.total} votes</span>
+              <span className='text-sm font-light italic'>{data.total} votes</span>
               <button
                 className='bg-my-purple px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none'
                 type='button'

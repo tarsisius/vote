@@ -7,6 +7,11 @@ type Props = {
   children: React.ReactNode
 }
 
+const as = Albert_Sans({
+  variable: '--font-albert-sans',
+  subsets: ['latin'],
+})
+
 export const metadata: Metadata = {
   title: {
     default: 'Ngom-poll',
@@ -17,11 +22,6 @@ export const metadata: Metadata = {
     shortcut: '/logo.svg',
   },
 }
-
-const as = Albert_Sans({
-  variable: '--font-albert-sans',
-  subsets: ['latin'],
-})
 
 export default function RootLayout({ children }: Props) {
   return (
