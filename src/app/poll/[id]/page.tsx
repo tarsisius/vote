@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { notFound } from 'next/navigation'
 import { doc, increment, onSnapshot, updateDoc } from 'firebase/firestore'
 import { toast } from 'react-hot-toast'
 import { db } from 'lib/firebase/config'
@@ -44,6 +45,10 @@ export default function Poll({ params }: { params: { id: string } }) {
       setWait(false)
       toast.error('error, please try again:' + error)
     }
+  }
+
+  if(!data){
+    notFound()
   }
   return (
     <>
