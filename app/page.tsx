@@ -1,44 +1,41 @@
 'use client'
-//library
+
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { toast } from 'react-hot-toast'
-//hand coded
-import { PlusIcon, XIcon } from 'lib/components/icons'
-import { db } from 'lib/firebase/config'
+import { PlusIcon, XIcon } from 'components/icons'
 
 export default function Home() {
   const [wait, setWait] = useState(false)
-  const [qs, setQs] = useState<string>('')
-  const [opts, setOpts] = useState<string[]>(['', ''])
+  const [title, setTitle] = useState<string>('')
+  const [options, setOptions] = useState<string[]>(['', ''])
 
   const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setWait(true)
-    try {
-      const docRef = doc(collection(db, 'polls'))
-      await setDoc(docRef, {
-        question: qs,
-        options: opts.reduce((obj, i) => {
-          return {
-            ...obj,
-            [i]: 0,
-          }
-        }, {}),
-        total: 0,
-        createdAt: serverTimestamp(),
-      })
+    const res = await fetch('/api/new-event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        new_options: options,
+      }),
+    })
+    if (res.ok) {
+      const { unique } = await res.json()
       setWait(false)
-      toast.success('Success create poll')
-      router.push(`/poll/${docRef.id}`)
-    } catch (error) {
+      toast.success('Success create event')
+      router.push(`/event/${unique}`)
+    } else {
       setWait(false)
-      toast.error('error, please try again:' + error)
+      toast.success('Failed create event')
     }
   }
+
   return (
     <form
       className='flex flex-col w-full px-4 py-3 text-left'
@@ -50,13 +47,13 @@ export default function Home() {
           className='bg-my-black text-white placeholder-opacity-40 placeholder:italic text-2xl font-bold focus:outline-none'
           type='text'
           placeholder="What's on your mind..."
-          name='question'
-          onChange={(e) => setQs(e.target.value)}
-          value={qs}
+          name='title'
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
           required
         />
         <div className='flex flex-col w-full space-y-4'>
-          {opts.map((opt: any, i: number) => (
+          {options.map((opt: any, i: number) => (
             <div
               className='bg-my-white bg-opacity-5 rounded-lg flex justify-start items-center px-5'
               key={i}
@@ -69,20 +66,20 @@ export default function Home() {
                 name={`opt${i + 1}`}
                 value={opt.value}
                 onChange={(e) => {
-                  const list = [...opts]
+                  const list = [...options]
                   list[i] = e.target.value
-                  setOpts(list)
+                  setOptions(list)
                 }}
                 required
               />
-              {!(opts.length <= 2) && (
+              {!(options.length <= 2) && (
                 <button
                   className='ml-auto'
                   type='button'
                   onClick={() => {
-                    const list = [...opts]
+                    const list = [...options]
                     list.splice(i, 1)
-                    setOpts(list)
+                    setOptions(list)
                   }}
                 >
                   <XIcon />
@@ -92,12 +89,12 @@ export default function Home() {
           ))}
         </div>
         <div className='flex justify-between w-full space-x-4'>
-          {opts?.length < 5 && (
+          {options?.length < 5 && (
             <button
               className='w-9 h-9 flex items-center justify-center leading-6 bg-my-white bg-opacity-5 rounded-lg transition-all duration-75 focus:outline-none'
               type='button'
               onClick={() => {
-                setOpts((prev) => [...prev, ''])
+                setOptions((prev) => [...prev, ''])
               }}
             >
               <PlusIcon />

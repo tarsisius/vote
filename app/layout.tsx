@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Albert_Sans } from 'next/font/google'
-import Link from 'next/link'
-import 'lib/styles/globals.css'
-import Toast from 'lib/components/toast'
+import 'styles/globals.css'
+import Toast from 'components/toast'
 
 type Props = {
   children: React.ReactNode
@@ -15,13 +14,11 @@ const as = Albert_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Voting',
-    template: '%s | Voting',
+    default: 'Asknonymous',
+    template: '%s | Asknonymous',
   },
-  description: 'Create your own poll!.',
-  icons: {
-    shortcut: '/logo.svg',
-  },
+  description: 'Get your feedback.',
+  icons: '/logo.svg',
 }
 
 export default function RootLayout({ children }: Props) {

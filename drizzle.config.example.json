@@ -1,0 +1,6 @@
+{
+    "out": "./migrations",
+    "schema": "./lib/db/schema.ts",
+    "connectionString": "mysql://xx@ap-southeast.connect.psdb.cloud/xx?ssl={\"rejectUnauthorized\":true}"
+  }
+  

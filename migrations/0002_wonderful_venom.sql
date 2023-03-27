@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX unique_idx ON events (`unique`);
