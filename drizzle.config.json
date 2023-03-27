@@ -1,5 +1,0 @@
-{
-  "out": "./migrations",
-  "schema": "./lib/db/schema.ts",
-  "connectionString": "mysql://ka5otzs5w6yzgs3gg5qk:pscale_pw_NQCwmlSPaGJ49BPGV19aRadMNVGX9VfxRLgPm0Po8xt@ap-southeast.connect.psdb.cloud/fullstack?ssl={\"rejectUnauthorized\":true}"
-}
