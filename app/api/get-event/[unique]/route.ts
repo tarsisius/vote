@@ -1,6 +1,5 @@
 import { eventByUnique } from 'lib/db/query'
 
-export const runtime = 'edge'
 
 export const GET = async (_: Request, { params }: any) => {
   const { unique } = params

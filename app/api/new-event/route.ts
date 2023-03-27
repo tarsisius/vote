@@ -1,7 +1,5 @@
 import { newEvent } from 'lib/db/query'
 
-export const runtime = 'edge'
-
 export const POST = async (request: Request) => {
   return await request
     .json()
