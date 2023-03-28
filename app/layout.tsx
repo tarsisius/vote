@@ -14,10 +14,10 @@ const as = Albert_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Asknonymous',
-    template: '%s | Asknonymous',
+    default: 'Voting',
+    template: '%s | Voting',
   },
-  description: 'Get your feedback.',
+  description: 'Get your.',
   icons: '/logo.svg',
 }
 
