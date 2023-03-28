@@ -1,8 +1,7 @@
 import Vote from 'components/vote'
 import { notFound } from 'next/navigation'
 
-export const runtime = 'experimental-edge'
-export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
 
 export default async function Event({ params }: any) {
   const { unique } = params
