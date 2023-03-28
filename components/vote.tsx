@@ -14,15 +14,15 @@ export default function Vote({ initialData, unique }: VoteProps) {
   const [selected, setSelected] = useState<number>()
   const [newData, setNewData] = useState<typeof initialData>()
 
-  useEffect(() => {
-    pusherClient.subscribe(`vote-${unique}`).bind('new-data', (data: any) => {
-      setNewData(data)
-    })
-    return () => {
-      pusherClient.unbind_all()
-      pusherClient.unsubscribe(`vote-${unique}`)
-    }
-  }, [pusherClient])
+  // useEffect(() => {
+  //   pusherClient.subscribe(`vote-${unique}`).bind('new-data', (data: any) => {
+  //     setNewData(data)
+  //   })
+  //   return () => {
+  //     pusherClient.unbind_all()
+  //     pusherClient.unsubscribe(`vote-${unique}`)
+  //   }
+  // }, [pusherClient])
 
   async function handleSubmit() {
     setWait(true)

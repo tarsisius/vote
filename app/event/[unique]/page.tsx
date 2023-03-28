@@ -2,6 +2,7 @@ import Vote from 'components/vote'
 import { notFound } from 'next/navigation'
 
 export const runtime = 'edge'
+export const dynamic = 'force-dynamic'
 
 export default async function Event({ params }: any) {
   const { unique } = params
@@ -18,7 +19,7 @@ export default async function Event({ params }: any) {
         <p className='bg-my-black text-white text-2xl font-bold'>
           {data.event.title}
         </p>
-        {/* <Vote initialData={data} unique={unique} /> */}
+        <Vote initialData={data} unique={unique} />
       </div>
     </div>
   )
