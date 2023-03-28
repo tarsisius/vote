@@ -1,23 +1,44 @@
-import { newEvent } from 'lib/db/query'
+import { nanoid } from 'nanoid'
+import { eq } from 'drizzle-orm/mysql-core/expressions'
+import { db } from 'lib/db/client'
+import { events, options } from 'lib/db/schema'
 
-export const POST = async (request: Request) => {
-  return await request
-    .json()
-    .then(async (body) => {
-      const { title, new_options } = body
-      const new_event = await newEvent({ title, new_options })
-      if (!new_event) {
-        return new Response(JSON.stringify('error when insert to db'), {
-          status: 500,
-        })
+// export const runtime = 'experimental-edge'
+export async function POST(req: Request) {
+  const { title, option_array } = await req.json()
+  const insertEvent = await db.insert(events).values({
+    title,
+    unique: nanoid(4),
+  })
+  if (!insertEvent.insertId) {
+    return new Response(JSON.stringify({ error: 'Error inserting event' }), {
+      status: 500,
+    })
+  }
+  const insertOption = await db.insert(options).values(
+    option_array.map((o: string) => {
+      return {
+        name: o,
+        event_id: Number(insertEvent.insertId),
       }
-      return new Response(JSON.stringify({ unique: new_event.unique }), {
-        status: 200,
-      })
     })
-    .catch(() => {
-      return new Response(JSON.stringify('error when parse body'), {
-        status: 500,
-      })
+  )
+  if (!insertOption.insertId) {
+    return new Response(JSON.stringify({ error: 'Error inserting option' }), {
+      status: 500,
     })
+  }
+  const getEvent = await db
+    .select()
+    .from(events)
+    .where(eq(events.id, Number(insertEvent.insertId)))
+    .then((data) => data[0])
+  if (!getEvent) {
+    return new Response(JSON.stringify({ error: 'fail' }), {
+      status: 500,
+    })
+  }
+  return new Response(JSON.stringify({ unique: getEvent.unique }), {
+    status: 200,
+  })
 }

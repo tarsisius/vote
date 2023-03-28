@@ -1,13 +1,22 @@
-import { eventByUnique } from 'lib/db/query'
+import { eq } from 'drizzle-orm/expressions'
+import { db } from 'lib/db/client'
+import { events, options } from 'lib/db/schema'
 
-
-export const GET = async (_: Request, { params }: any) => {
+export const runtime = 'experimental-edge'
+export async function GET(_: Request, { params }: any) {
   const { unique } = params
-  const event_data = await eventByUnique(unique)
-  if (!event_data) {
-    return new Response(JSON.stringify('error when get from db'), {
-      status: 404,
+  const getEvent = await db
+    .select()
+    .from(events)
+    .where(eq(events.unique, unique))
+    .then(async (data) => {
+      return {
+        event: data[0],
+        options: await db
+          .select()
+          .from(options)
+          .where(eq(options.event_id, data[0].id)),
+      }
     })
-  }
-  return new Response(JSON.stringify({...event_data}), { status: 200 })
+  return new Response(JSON.stringify(getEvent), { status: 200 })
 }

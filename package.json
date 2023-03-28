@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@planetscale/database": "^1.6.0",
-    "drizzle-orm": "^0.22.0-d52ce91",
-    "nanoid": "^4.0.1",
+    "drizzle-orm": "^0.23.2",
+    "nanoid": "^4.0.2",
     "next": "13.2.4",
     "pusher": "^5.1.2",
     "pusher-js": "^8.0.2",
@@ -23,11 +23,11 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
-    "@types/node": "^18.15.3",
-    "@types/react": "^18.0.28",
+    "@types/node": "^18.15.10",
+    "@types/react": "^18.0.30",
     "@types/react-dom": "^18.0.11",
     "autoprefixer": "^10.4.14",
-    "drizzle-kit": "^0.17.0-0cf3fe9",
+    "drizzle-kit": "^0.17.1-6d783c6",
     "encoding": "^0.1.13",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"

@@ -22,7 +22,7 @@ export default function Home() {
       },
       body: JSON.stringify({
         title,
-        new_options: options,
+        option_array: options,
       }),
     })
     if (res.ok) {
