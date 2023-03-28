@@ -3,7 +3,6 @@ import { eq } from 'drizzle-orm/mysql-core/expressions'
 import { db } from 'lib/db/client'
 import { events, options } from 'lib/db/schema'
 
-// export const runtime = 'experimental-edge'
 export async function POST(req: Request) {
   const { title, option_array } = await req.json()
   const insertEvent = await db.insert(events).values({

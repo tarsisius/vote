@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { LinkIcon } from 'components/icons'
-// import { pusherClient } from 'lib/pusher'
+import { pusherClient } from 'lib/pusher'
 
 interface VoteProps {
   initialData: any
@@ -13,17 +13,16 @@ export default function Vote({ initialData, unique }: VoteProps) {
   const [wait, setWait] = useState(false)
   const [selected, setSelected] = useState<number>()
   const [newData, setNewData] = useState<typeof initialData>()
-
   useEffect(() => {
-    // const channel = pusherClient.subscribe(`vote-${unique}`)
-    // channel.bind('new-data', (data: any) => {
-    //   setNewData(data)
-    // })
-    // return () => {
-    //   channel.unbind_all()
-    //   channel.unsubscribe()
-    // }
-  }, [])
+    const channel = pusherClient.subscribe(`vote-${unique}`)
+    channel.bind('new-data', (data: any) => {
+      setNewData(data)
+    })
+    return () => {
+      channel.unbind_all()
+      channel.unsubscribe()
+    }
+  })
 
   async function handleSubmit() {
     setWait(true)

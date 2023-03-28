@@ -1,8 +1,8 @@
 import { eq } from 'drizzle-orm/mysql-core/expressions'
+import { pusherServer } from 'lib/pusher'
 import { db } from 'lib/db/client'
 import { events, options } from 'lib/db/schema'
 
-// export const runtime = 'experimental-edge'
 export async function PATCH(req: Request, { params }: any) {
   const { unique } = params
   const { option_id } = await req.json()
@@ -49,5 +49,6 @@ export async function PATCH(req: Request, { params }: any) {
           .where(eq(options.event_id, data[0].id)),
       }
     })
+  await pusherServer.trigger(`vote-${unique}`, 'new-data', getData)
   return new Response(JSON.stringify(getData), { status: 200 })
 }
