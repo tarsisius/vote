@@ -27,7 +27,7 @@ export default function Vote({ initialData, unique }: VoteProps) {
   async function handleSubmit() {
     setWait(true)
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/get-event/${unique}`,
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/vote-event/${unique}`,
       {
         method: 'PATCH',
         headers: {
