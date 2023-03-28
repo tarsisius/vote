@@ -1,18 +1,48 @@
-import Vote from 'components/vote'
 import { notFound } from 'next/navigation'
+
+import { eq } from 'drizzle-orm/expressions'
+import { db } from 'lib/db/client'
+import { events, options } from 'lib/db/schema'
+
+import Vote from 'components/vote'
+
+async function getEvent(unique: string) {
+  const data = await db
+    .select({
+      id: events.id,
+      unique: events.unique,
+      title: events.title,
+      total: events.total,
+    })
+    .from(events)
+    .where(eq(events.unique, unique))
+    .then(async (data) => {
+      if (!data[0]) {
+        return null
+      }
+      return {
+        event: data[0],
+        option: await db
+          .select()
+          .from(options)
+          .where(eq(options.event_id, data[0].id)),
+      }
+    })
+
+  return data
+}
 
 export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 export default async function Event({ params }: any) {
   const { unique } = params
-  const res = await fetch(`${process.env.APP_URL}/api/get-event/${unique}`, {
-    cache: 'no-cache',
-  })
-  if (!res.ok) {
+
+  const data = await getEvent(unique)
+
+  if (!data) {
     notFound()
   }
-  const data = await res.json()
   return (
     <div className='flex flex-col w-full px-4 py-3 text-left'>
       <div className='flex flex-col w-full space-y-4'>
