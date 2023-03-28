@@ -18,9 +18,6 @@ export const metadata: Metadata = {
     template: '%s | Voting',
   },
   description: 'Get your.',
-  icons: {
-    icon: '/logo.svg',
-  },
 }
 
 export default function RootLayout({ children }: Props) {
