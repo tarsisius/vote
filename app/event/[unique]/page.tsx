@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 
 export default async function Event({ params }: any) {
   const { unique } = params
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/get-event/${unique}`)
+  const res = await fetch(`${process.env.APP_URL}/api/get-event/${unique}`)
   if (!res.ok) {
     notFound()
   }

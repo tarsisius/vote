@@ -12,7 +12,7 @@ export async function GET(_: Request, { params }: any) {
     .then(async (data) => {
       return {
         event: data[0],
-        options: await db
+        option: await db
           .select()
           .from(options)
           .where(eq(options.event_id, data[0].id)),
