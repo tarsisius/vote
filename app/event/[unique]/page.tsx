@@ -18,7 +18,7 @@ export default async function Event({ params }: any) {
         <p className='bg-my-black text-white text-2xl font-bold'>
           {data.event.title}
         </p>
-        <Vote initialData={data} unique={unique} />
+        {/* <Vote initialData={data} unique={unique} /> */}
       </div>
     </div>
   )
