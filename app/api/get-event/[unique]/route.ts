@@ -2,7 +2,8 @@ import { eq } from 'drizzle-orm/expressions'
 import { db } from 'lib/db/client'
 import { events, options } from 'lib/db/schema'
 
-export const runtime = 'experimental-edge'
+export const runtime = 'edge'
+
 export async function GET(_: Request, { params }: any) {
   const { unique } = params
   const getEvent = await db

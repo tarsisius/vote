@@ -26,19 +26,16 @@ export default function Vote({ initialData, unique }: VoteProps) {
 
   async function handleSubmit() {
     setWait(true)
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/vote-event/${unique}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          unique,
-          option_id: selected,
-        }),
-      }
-    )
+    const res = await fetch(`/api/vote-event/${unique}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        unique,
+        option_id: selected,
+      }),
+    })
     setWait(false)
     if (res.ok) {
       toast.success('Success vote')
