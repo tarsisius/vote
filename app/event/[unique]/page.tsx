@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function Event({ params }: any) {
   const { unique } = params
-  const res = await fetch(`https://vote.thp.my.id/api/get-event/${unique}`, {
+  const res = await fetch(`${process.env.APP_URL}/api/get-event/${unique}`, {
     cache: 'no-cache',
   })
   if (!res.ok) {
