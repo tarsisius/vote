@@ -43,6 +43,11 @@ export default function Vote({ initialData, unique }: VoteProps) {
       toast.success('Failed vote')
     }
   }
+
+  function handleCopy() {
+    navigator.clipboard.writeText(window.location.toString())
+    toast.success('Link copied!')
+  }
   return (
     <>
       {!newData
@@ -122,7 +127,7 @@ export default function Vote({ initialData, unique }: VoteProps) {
           <button
             className='w-9 h-9 flex items-center justify-center leading-6 bg-my-white bg-opacity-5 rounded-lg transition-all duration-75 focus:outline-none'
             type='button'
-            //   onClick={handleCopy}
+            onClick={handleCopy}
           >
             <LinkIcon />
           </button>
