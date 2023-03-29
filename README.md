@@ -4,6 +4,9 @@
 
 **Introducing Vote** - an interactive voting tool that super easy to use.
 
+**Live Demo**
+[Vote](https://vote.thp.my.id)
+
 **Features**
 - Create voting/polling in a second, without authentication.
 - Get audience response in realtime
@@ -13,7 +16,7 @@
 - Next Js 13 (app directory, rsc, etc..)
 - Planetscale database (mysql)
 - Drizzle orm (try new orm with typescript base, instead of using prisma only for experiment by my self)
-- Puhser js (realtime features)
+- Pusher js (realtime features)
 - Tailwind css
 
 
