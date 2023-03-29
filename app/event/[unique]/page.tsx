@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { cookies } from 'next/headers'
 
 import { eq } from 'drizzle-orm/expressions'
 import { db } from 'lib/db/client'
@@ -36,6 +37,15 @@ export const dynamic = 'force-dynamic'
 
 export default async function Event({ params }: any) {
   const { unique } = params
+
+  const cookieStore = cookies()
+  const event_cookie = cookieStore.get(unique)
+
+  let voted
+  if (event_cookie) {
+    voted = event_cookie.value
+  }
+
   const data = await getEvent(unique)
   if (!data) {
     notFound()
@@ -46,7 +56,7 @@ export default async function Event({ params }: any) {
         <p className='bg-my-black text-white text-2xl font-bold'>
           {data.event.title}
         </p>
-        <Vote initialData={data} unique={unique} />
+        <Vote initialData={data} unique={unique} voted={voted} />
       </div>
     </div>
   )

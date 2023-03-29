@@ -14,10 +14,10 @@ const as = Albert_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Voting',
-    template: '%s | Voting',
+    default: 'Vote',
+    template: '%s | Vote',
   },
-  description: 'Get your.',
+  description: 'Get your own vote.',
 }
 
 export default function RootLayout({ children }: Props) {

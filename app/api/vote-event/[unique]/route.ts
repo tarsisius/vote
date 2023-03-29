@@ -50,5 +50,13 @@ export async function PATCH(req: Request, { params }: any) {
       }
     })
   await pusherServer.trigger(`vote-${unique}`, 'new-data', getData)
-  return new Response(JSON.stringify(getData), { status: 200 })
+
+  return new Response(JSON.stringify(getData), {
+    status: 200,
+    headers: {
+      'Set-Cookie': `${unique}=${option_id}; HttpOnly; Path=/; Max-Age=${
+        60 * 60 * 24 * 180
+      }`,
+    },
+  })
 }

@@ -8,21 +8,33 @@ import { pusherClient } from 'lib/pusher'
 interface VoteProps {
   initialData: any
   unique: string
+  voted: string | undefined
 }
-export default function Vote({ initialData, unique }: VoteProps) {
+export default function Vote({
+  initialData,
+  unique,
+  voted: already,
+}: VoteProps) {
   const [wait, setWait] = useState(false)
   const [selected, setSelected] = useState<number>()
+  const [voted, setVoted] = useState(false)
   const [newData, setNewData] = useState<typeof initialData>()
+
   useEffect(() => {
+    if (already) {
+      setSelected(Number(voted))
+      setVoted(true)
+    }
     const channel = pusherClient.subscribe(`vote-${unique}`)
     channel.bind('new-data', (data: any) => {
       setNewData(data)
+      setVoted(true)
     })
     return () => {
       channel.unbind_all()
       channel.unsubscribe()
     }
-  })
+  }, [pusherClient, already])
 
   async function handleSubmit() {
     setWait(true)
@@ -131,14 +143,18 @@ export default function Vote({ initialData, unique }: VoteProps) {
           >
             <LinkIcon />
           </button>
-          <button
-            className='bg-my-purple px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none'
-            type='button'
-            disabled={selected === undefined}
-            onClick={handleSubmit}
-          >
-            {wait ? '...' : 'Vote'}
-          </button>
+          {voted ? (
+            <p>You already voted</p>
+          ) : (
+            <button
+              className='bg-my-purple px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none'
+              type='button'
+              disabled={selected === undefined}
+              onClick={handleSubmit}
+            >
+              {wait ? '...' : 'Vote'}
+            </button>
+          )}
         </div>
       </div>
     </>
