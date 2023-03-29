@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
-import { PlusIcon, XIcon } from 'components/icons'
+import { LoadingIcon, PlusIcon, XIcon } from 'components/icons'
 
 export default function Home() {
   const [wait, setWait] = useState(false)
@@ -104,7 +104,7 @@ export default function Home() {
             className='bg-my-purple text-my-white px-4 flex h-9 w-20 items-center justify-center rounded-lg focus:outline-none ml-auto'
             type='submit'
           >
-            {wait ? '...' : 'Create'}
+            {wait ? <LoadingIcon/> : 'Create'}
           </button>
         </div>
       </div>

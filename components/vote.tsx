@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { LinkIcon } from 'components/icons'
+import { LoadingIcon, LinkIcon } from 'components/icons'
 import { pusherClient } from 'lib/pusher'
 
 interface VoteProps {
@@ -152,7 +152,7 @@ export default function Vote({
               disabled={selected === undefined}
               onClick={handleSubmit}
             >
-              {wait ? '...' : 'Vote'}
+              {wait ? <LoadingIcon /> : 'Vote'}
             </button>
           )}
         </div>
