@@ -2,10 +2,10 @@ import { notFound } from 'next/navigation'
 import { cookies } from 'next/headers'
 
 import { eq } from 'drizzle-orm/expressions'
-import { db } from 'lib/db/client'
-import { events, options } from 'lib/db/schema'
+import { db } from '@/lib/db/client'
+import { events, options } from '@/lib/db/schema'
 
-import Vote from 'components/vote'
+import Vote from '@/components/vote'
 
 async function getEvent(unique: string) {
   const data = await db

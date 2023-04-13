@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Albert_Sans } from 'next/font/google'
-import 'styles/globals.css'
-import Toast from 'components/toast'
+import '@/styles/globals.css'
+import Toast from '@/components/toast'
 
 type Props = {
   children: React.ReactNode
@@ -23,7 +23,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
-      <head />
       <body className={`${as.className}`}>
         <Toast />
         <div className='flex min-h-screen flex-col bg-my-black text-my-white'>

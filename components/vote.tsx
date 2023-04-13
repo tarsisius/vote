@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { LoadingIcon, LinkIcon } from 'components/icons'
-import { pusherClient } from 'lib/pusher'
+import { LoadingIcon, LinkIcon } from '@/components/icons'
+import { pusherClient } from '@/lib/pusher'
 
 interface VoteProps {
   initialData: any
   unique: string
   voted: string | undefined
 }
+
 export default function Vote({
   initialData,
   unique,

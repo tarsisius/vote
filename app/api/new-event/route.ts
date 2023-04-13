@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { eq } from 'drizzle-orm/mysql-core/expressions'
-import { db } from 'lib/db/client'
-import { events, options } from 'lib/db/schema'
+import { db } from '@/lib/db/client'
+import { events, options } from '@/lib/db/schema'
 
 export async function POST(req: Request) {
   const { title, option_array } = await req.json()

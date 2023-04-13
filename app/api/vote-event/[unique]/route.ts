@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm/mysql-core/expressions'
-import { pusherServer } from 'lib/pusher'
-import { db } from 'lib/db/client'
-import { events, options } from 'lib/db/schema'
+import { pusherServer } from '@/lib/pusher'
+import { db } from '@/lib/db/client'
+import { events, options } from '@/lib/db/schema'
 
 export async function PATCH(req: Request, { params }: any) {
   const { unique } = params
