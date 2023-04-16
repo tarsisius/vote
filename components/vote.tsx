@@ -11,11 +11,7 @@ interface VoteProps {
   voted: string | undefined
 }
 
-export default function Vote({
-  initialData,
-  unique,
-  voted: already,
-}: VoteProps) {
+const Vote = ({ initialData, unique, voted: already }: VoteProps) => {
   const [wait, setWait] = useState(false)
   const [selected, setSelected] = useState<number>()
   const [voted, setVoted] = useState(false)
@@ -161,3 +157,4 @@ export default function Vote({
     </>
   )
 }
+export default Vote

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { LoadingIcon, PlusIcon, XIcon } from '@/components/icons'
 
-export default function Form() {
+const Form = () => {
   const [wait, setWait] = useState(false)
   const [title, setTitle] = useState<string>('')
   const [options, setOptions] = useState<string[]>(['', ''])
@@ -110,3 +110,4 @@ export default function Form() {
     </form>
   )
 }
+export default Form

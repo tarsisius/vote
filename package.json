@@ -14,7 +14,7 @@
     "@planetscale/database": "^1.7.0",
     "drizzle-orm": "^0.23.8",
     "nanoid": "^4.0.2",
-    "next": "^13.2.4",
+    "next": "^13.3.0",
     "pusher": "^5.1.2",
     "pusher-js": "^8.0.1",
     "react": "18.2.0",
