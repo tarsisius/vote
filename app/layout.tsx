@@ -8,7 +8,6 @@ type Props = {
 }
 
 const as = Albert_Sans({
-  variable: '--font-albert-sans',
   subsets: ['latin'],
 })
 
