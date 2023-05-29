@@ -8,6 +8,10 @@ module.exports = {
         'my-black': '#212121',
         'my-white': '#F8F8F8',
       },
+      fontFamily:{
+        'my-base': ['Noto Sans', 'sans-serif'],
+        'my-head': ['Ubuntu', 'sans-serif'],
+      }
     },
   },
   plugins: [],
